@@ -23,7 +23,7 @@ ou
 $ npm run dev
 ```
 
-### Como testar
+## Como testar
 Atualmente só existe uma rota
 
 é possível chamar ela com um curl
