@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { accessControlMiddleware } from "./middlewares/access-control-middleware";
-import mainRoute from "./routes/index";
+import healthz from "./routes/healthz";
 
 const apiRouter = Router();
 
 apiRouter.use(accessControlMiddleware);
-apiRouter.use(mainRoute);
+apiRouter.use(healthz);
 
 export default apiRouter;
