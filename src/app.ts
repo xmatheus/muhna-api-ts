@@ -9,7 +9,11 @@ const app = express();
 
 // Set Morgan Logger
 if (process.env.NODE_ENV === "development") {
-    app.use(morgan("[INFO] - :method - :url :remote-addr [:date[clf]] - STATUS :status - :response-time ms"));
+    app.use(
+        morgan(
+            "[INFO] - :method - :url :remote-addr [:date[clf]] - STATUS :status - :response-time ms"
+        )
+    );
 }
 
 app.disable("x-powered-by");
@@ -17,7 +21,6 @@ app.disable("x-powered-by");
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 // Routes
 app.use("/api", routes);

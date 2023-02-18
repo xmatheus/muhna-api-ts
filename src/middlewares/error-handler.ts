@@ -1,26 +1,31 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 
 export const STATUS_CODE = {
-    ok: 200,
-    movedPermanently: 301,
-    found: 302,
-    badRequest: 400,
-    unauthorized: 401,
-    notFound: 404,
-    serverError: 500,
-    badGateway: 502,
+    OK: 200,
+    CREATED: 201,
+    ACCEPTED: 202,
+    NO_CONTENT: 204,
+    MOVED_PERMANENTLY: 301,
+    FOUND: 302,
+    NOT_MODIFIED: 304,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    FORBIDDEN: 403,
+    NOT_FOUND: 404,
+    METHOD_NOT_ALLOWED: 405,
+    CONFLICT: 409,
+    INTERNAL_SERVER_ERROR: 500,
+    NOT_IMPLEMENTED: 501,
+    BAD_GATEWAY: 502,
+    SERVICE_UNAVAILABLE: 503,
+    GATEWAY_TIMEOUT: 504
 };
 
-function errorHandler(
-    error: Error,
-    _: Request,
-    res: Response,
-    next: NextFunction,
-) {
+function errorHandler(error: Error, _: Request, res: Response) {
     console.error(error);
 
     return res
-        .status(STATUS_CODE.serverError)
+        .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
         .json({ message: "Internal Server Error" });
 }
 
