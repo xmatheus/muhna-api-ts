@@ -21,12 +21,11 @@ export const STATUS_CODE = {
     GATEWAY_TIMEOUT: 504
 };
 
-function errorHandler(error: Error, _: Request, res: Response) {
-    console.error(error);
-
-    return res
-        .status(STATUS_CODE.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+function errorHandler(err: any, req: Request, res: Response) {
+    const statusCode = err.statusCode || STATUS_CODE.INTERNAL_SERVER_ERROR;
+    const message = err.message || "Internal server error";
+    console.error(err.stack);
+    res.status(statusCode).json({ message });
 }
 
 export default errorHandler;
