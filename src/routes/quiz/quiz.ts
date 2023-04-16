@@ -1,10 +1,12 @@
 import { Router } from "express";
-import Quiz from "../database/mongo/models/quiz";
-import Question from "../database/mongo/models/question";
-import { STATUS_CODE } from "../middlewares/error-handler";
+import Quiz from "../../database/mongo/models/quiz";
+import Question from "../../database/mongo/models/question";
+import { STATUS_CODE } from "../../middlewares/error-handler";
+import { auth } from "../../middlewares/auth";
+import { checkRoles } from "../../middlewares/check-roles";
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, checkRoles(["admin"]), async (req, res) => {
     try {
         const quizzes = await Quiz.find({}).populate({
             path: "questions",
