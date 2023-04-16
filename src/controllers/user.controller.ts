@@ -20,7 +20,7 @@ export async function login(email: string, password: string) {
             { id: foundUser.id },
             process.env.SECRET as string,
             {
-                expiresIn: 20 // expires in 5min
+                expiresIn: 300 // expires in 5min
             }
         );
 
