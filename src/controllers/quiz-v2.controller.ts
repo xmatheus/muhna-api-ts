@@ -1,5 +1,7 @@
+import { Choice } from "@prisma/client";
 import { prismaClient } from "../database/prismaClient";
 import { CreateProps, UpdateProps } from "../types/quizv2";
+import { CustomQuestion } from "../types/controllers/quiz-v2-controller";
 
 export async function getAll() {
     const quizzes = await prismaClient.quiz.findMany({
@@ -107,7 +109,7 @@ export async function deleteById({ quizId }: Pick<UpdateProps, "quizId">) {
     });
 
     for (const question of questions) {
-        const choiceIds = question.choices.map((choice) => choice.id);
+        const choiceIds = question.choices.map((choice: Choice) => choice.id);
         await prismaClient.choice.deleteMany({
             where: {
                 id: {
@@ -117,7 +119,9 @@ export async function deleteById({ quizId }: Pick<UpdateProps, "quizId">) {
         });
     }
 
-    const questionIds = questions.map((question) => question.id);
+    const questionIds = questions.map(
+        (question: CustomQuestion) => question.id
+    );
 
     await prismaClient.question.deleteMany({
         where: {
