@@ -1,14 +1,21 @@
-import { Choice } from "@prisma/client";
+export type Question = {
+    id: string;
+    text: string;
+    choices: Choice[];
+    createdAt: Date;
+    updatedAt: Date;
+};
 
 export interface CustomQuestion {
     id: string;
     choices: Choice[];
 }
 
-export type Question = {
+export type Choice = {
     id: string;
     text: string;
-    choices: Choice[];
+    isCorrect: boolean;
+    questionId: string;
     createdAt: Date;
     updatedAt: Date;
 };
@@ -20,5 +27,5 @@ export interface CreateProps {
 }
 
 export interface UpdateProps extends CreateProps {
-    quizId: string;
+    id: string;
 }

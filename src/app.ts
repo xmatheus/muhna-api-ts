@@ -16,13 +16,13 @@ if (process.env.NODE_ENV === "development") {
     );
 }
 
+// doesn't show server information
 app.disable("x-powered-by");
 
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Routes
 app.use("/api", routes);
 
 app.use(errorHandler);

@@ -1,0 +1,41 @@
+version: "3"
+services:
+    mongo:
+        image: mongo
+        container_name: mongo-muhna
+        restart: always
+        ports:
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+            MONGO_INITDB_NAME: "mongo-muhna"
+
+    postgres:
+        image: postgres:latest
+        container_name: postgres-muhna
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    api:
+        build: .
+        container_name: api
+        restart: always
+        depends_on:
+            - mongo
+            - postgres
+        ports:
+            - "3001:3001"
+        volumes:
+            - .:/usr/app
+        working_dir: /usr/app
+        command: yarn start
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "5"

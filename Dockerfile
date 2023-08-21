@@ -1,7 +1,13 @@
-FROM node:12-alpine3.14
-WORKDIR /app
-COPY package.json /app
-COPY . /app
-RUN npm install --only=production && npm cache clean --force
-CMD npm run start
+FROM node:alpine
+
+WORKDIR /usr/app
+
+COPY package*.json ./
+COPY yarn.lock ./
+RUN yarn
+
+COPY . .
+
 EXPOSE 3001
+
+CMD [ "yarn",  "start" ]

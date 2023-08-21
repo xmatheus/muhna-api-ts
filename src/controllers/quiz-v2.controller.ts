@@ -1,7 +1,7 @@
 import { Choice } from "@prisma/client";
 import { prismaClient } from "../database/prismaClient";
 import { CreateProps, UpdateProps } from "../types/quizv2";
-import { CustomQuestion } from "../types/controllers/quiz-v2-controller";
+import { CustomQuestion } from "../types/quizv2";
 
 export async function getAll() {
     const quizzes = await prismaClient.quiz.findMany({
