@@ -4,6 +4,7 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 COPY yarn.lock ./
+RUN npm install --global yarn
 RUN yarn
 
 COPY . .
