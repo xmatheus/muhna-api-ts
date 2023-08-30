@@ -1,10 +1,10 @@
 FROM node:alpine
+RUN apk add --no-cache yarn
 
 WORKDIR /usr/app
 
 COPY package*.json ./
 COPY yarn.lock ./
-RUN npm install --global yarn
 RUN yarn
 
 COPY . .
