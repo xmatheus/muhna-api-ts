@@ -42,7 +42,7 @@ services:
         volumes:
             - .:/usr/app
         working_dir: /usr/app
-        command: npm run start
+        command: npm run start:run
         logging:
             driver: "json-file"
             options:
