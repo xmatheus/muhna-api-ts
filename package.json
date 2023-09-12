@@ -8,10 +8,10 @@
     "scripts": {
         "build": "tsc",
         "clean:build": "shx rm -rf build",
-        "start": "yarn clean:build && yarn build && node build/",
+        "start": "npm run clean:build && npm run build && node build/",
         "dev": "ts-node-dev --exit-child -r dotenv/config src/index",
         "test": "mocha -r ts-node/register src/**/*.test.ts",
-        "prepare": "husky install",
+        "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install",
         "prettier:write": "prettier --write .",
         "lint": "eslint ./",
         "lint:fix": "eslint ./ --fix"

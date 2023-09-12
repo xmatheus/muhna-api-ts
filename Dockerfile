@@ -1,14 +1,17 @@
 FROM node:alpine
-RUN apk add --no-cache yarn
-
 WORKDIR /usr/app
-
 COPY package*.json ./
-COPY yarn.lock ./
-RUN yarn
+COPY tsconfig*.json ./
+COPY prisma ./prisma/
+RUN npm install
+RUN npx prisma generate
+COPY . ./
+RUN npm run build
 
-COPY . .
-
-EXPOSE 3001
-
-CMD [ "yarn",  "start" ]
+FROM node:alpine
+RUN apk add dumb-init
+ENV NODE_ENV production
+WORKDIR /usr/app
+COPY . ./
+RUN npm ci --omit=dev
+CMD ["dumb-init", "node", "build/"]
