@@ -32,7 +32,9 @@ services:
     #             max-file: "5"
 
     api:
-        build: .
+        build:
+            context: ./
+            dockerfile: Dockerfile
         container_name: api
         restart: always
         depends_on:
@@ -42,7 +44,7 @@ services:
         volumes:
             - .:/usr/app
         working_dir: /usr/app
-        command: npm run start:run
+        command: ["npm", "run", "start:migrate:prod"]
         logging:
             driver: "json-file"
             options:

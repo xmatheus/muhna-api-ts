@@ -1,17 +1,25 @@
-FROM node:alpine
+FROM node:alpine AS builder
+
 WORKDIR /usr/app
+
 COPY package*.json ./
-COPY tsconfig*.json ./
 COPY prisma ./prisma/
+
 RUN npm install
 RUN npx prisma generate
-COPY . ./
+
+COPY . .
+
 RUN npm run build
 
 FROM node:alpine
-RUN apk add dumb-init
-ENV NODE_ENV production
-WORKDIR /usr/app
-COPY . ./
-RUN npm ci --omit=dev
-CMD ["dumb-init", "node", "build/"]
+
+COPY --from=builder /usr/app/node_modules ./node_modules
+COPY --from=builder /usr/app/package*.json ./
+COPY --from=builder /usr/app/build ./build
+COPY --from=builder /usr/app/prisma ./prisma
+
+
+EXPOSE 3001
+
+CMD [ "npm", "run", "start:migrate:prod" ]
