@@ -38,11 +38,11 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: Use Node.js ${{ matrix.node-version }}
-              if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+              if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && github.event.pull_request.merged
               uses: actions/setup-node@v3
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: "npm"
             - run: npm ci
             - run: npm run build
-            - run: pm2 restart muhna-api
+            - run: pm2 restart muhnaApi
