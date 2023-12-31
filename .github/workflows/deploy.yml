@@ -1,4 +1,4 @@
-name: Deploy CI
+name: Deploy CI -> self-hosted
 
 on:
     push:
