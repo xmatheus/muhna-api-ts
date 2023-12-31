@@ -8,13 +8,11 @@ import routes from "./routes";
 const app = express();
 
 // Set Morgan Logger
-if (process.env.NODE_ENV === "development") {
-    app.use(
-        morgan(
-            "[INFO] - :method - :url :remote-addr [:date[clf]] - STATUS :status - :response-time ms"
-        )
-    );
-}
+app.use(
+    morgan(
+        "[INFO] - :method - :url :remote-addr [:date[clf]] - STATUS :status - :response-time ms"
+    )
+);
 
 // doesn't show server information
 app.disable("x-powered-by");

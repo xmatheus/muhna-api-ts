@@ -7,11 +7,7 @@ export const runServer = async () => {
     await Mongo.connect();
 
     app.listen(SERVER_PORT, "::", () => {
-        if (process.env.NODE_ENV !== "production") {
-            console.log(
-                `API http server running http://localhost:${SERVER_PORT}/`
-            );
-        }
+        console.log(`API http server running http://localhost:${SERVER_PORT}/`);
     });
 };
 
