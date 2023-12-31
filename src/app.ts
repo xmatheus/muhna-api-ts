@@ -23,6 +23,6 @@ app.use(express.json());
 
 app.use("/api", routes);
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 export default http.createServer(app);

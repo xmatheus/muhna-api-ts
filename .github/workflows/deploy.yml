@@ -22,5 +22,6 @@ jobs:
                   echo "${{ secrets.ENV_FILE }}" > .env
             - run: npm ci
             - run: npm run build
-            # - run: make down
+            - run: make down
+              continue-on-error: true
             - run: make up
