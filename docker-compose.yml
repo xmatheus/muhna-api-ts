@@ -49,4 +49,5 @@ services:
                 max-size: "10m"
                 max-file: "5"
         networks:
-            - muhna_network
+            muhna_network:
+                driver: bridge
