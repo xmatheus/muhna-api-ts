@@ -1,4 +1,7 @@
 version: "3"
+networks:
+    muhna_network:
+        driver: bridge
 services:
     # mongo:
     #     image: mongo
@@ -49,5 +52,4 @@ services:
                 max-size: "10m"
                 max-file: "5"
         networks:
-            muhna_network:
-                driver: bridge
+            - muhna_network
