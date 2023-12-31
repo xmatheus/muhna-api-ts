@@ -9,7 +9,7 @@
         "build": "tsc",
         "clean:build": "shx rm -rf build",
         "start": "npm run clean:build && npm run build && node build/",
-        "start:run": "node ./build/src",
+        "start:run": "node ./build/",
         "start:migrate:prod": "prisma migrate deploy && npm run start:run",
         "dev": "ts-node-dev --exit-child -r dotenv/config src/index",
         "test": "mocha -r ts-node/register src/**/*.test.ts",

@@ -19,7 +19,6 @@ COPY --from=builder /usr/app/package*.json ./
 COPY --from=builder /usr/app/build ./build
 COPY --from=builder /usr/app/prisma ./prisma
 
-
 EXPOSE 3001
 
 CMD [ "npm", "run", "start:migrate:prod" ]
