@@ -40,9 +40,6 @@ services:
         restart: always
         ports:
             - "3001:3001"
-        volumes:
-            - .:/usr/app
-        working_dir: /usr/app
         command: ["npm", "run", "start:migrate:prod"]
         logging:
             driver: "json-file"
