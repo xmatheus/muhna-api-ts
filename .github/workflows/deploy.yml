@@ -18,6 +18,9 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: "npm"
+            - run: |
+                  echo "${{ secrets.ENV_FILE }}" > .env
             - run: npm ci
             - run: npm run build
-            - run: pm2 restart muhnaApi
+            - run: make down
+            - run: make up
