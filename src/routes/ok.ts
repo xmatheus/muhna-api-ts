@@ -2,8 +2,8 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/_healthz", (_, res) => {
-    res.send("I'm healthy");
+router.get("/_ok", (_, res) => {
+    res.send({ msg: "I'm ok" });
 });
 
 export default router;

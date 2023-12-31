@@ -1,23 +1,18 @@
 import app from "./app";
+import * as Mongo from "./database/mongo";
 
-const DBConfig = () => {
-    return {
-        connect: async () => {}
-    }
-}
-
-const SERVER_PORT = 3001;
+const SERVER_PORT = parseInt(process.env.PORT || "") || 3001;
 
 export const runServer = async () => {
-    const dbConfig = DBConfig();
-    await dbConfig.connect();
+    await Mongo.connect();
 
     app.listen(SERVER_PORT, "::", () => {
         if (process.env.NODE_ENV !== "production") {
-            console.log(`API http server running on port ${SERVER_PORT}`);
+            console.log(
+                `API http server running http://localhost:${SERVER_PORT}/`
+            );
         }
     });
-
 };
 
 runServer();
