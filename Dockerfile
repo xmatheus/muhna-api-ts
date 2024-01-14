@@ -1,4 +1,4 @@
-FROM node:alpine AS builder
+FROM node:lts-alpine AS builder
 
 WORKDIR /usr/app
 
@@ -12,7 +12,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:alpine
+FROM node:lts-alpine
 
 COPY --from=builder /usr/app/node_modules ./node_modules
 COPY --from=builder /usr/app/package*.json ./

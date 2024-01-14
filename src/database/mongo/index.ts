@@ -6,3 +6,7 @@ export async function connect() {
         dbName: "prod"
     });
 }
+
+export async function disconnect() {
+    await mongoose.disconnect();
+}
